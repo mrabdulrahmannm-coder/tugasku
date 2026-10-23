@@ -1,0 +1,19 @@
+# ---------------------------------------------------------------------------
+# SPA Fallback untuk TugasKu
+# ---------------------------------------------------------------------------
+# File ini otomatis disalin ke folder "dist" oleh Vite saat build.
+# Tujuannya: alamat seperti /reset-password?token=... tetap dilayani oleh
+# index.html agar React Router bisa membaca query string dari tautan email.
+# ---------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Berkas & folder yang benar-benar ada (aset, gambar, favicon, dll)
+    # tidak boleh diteruskan ke index.html.
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Seluruh request lain dilayani oleh entry point React.
+    RewriteRule ^ index.html [L]
+</IfModule>
